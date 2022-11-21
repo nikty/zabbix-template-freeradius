@@ -1,0 +1,463 @@
+zabbix_export:
+  version: '6.2'
+  date: '2022-11-21T14:07:42Z'
+  template_groups:
+    -
+      uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
+      name: Templates/Applications
+  templates:
+    -
+      uuid: 2a304559a8be41928d133260ad0290a3
+      template: 'FreeRADIUS by Zabbix agent'
+      name: 'FreeRADIUS by Zabbix agent'
+      groups:
+        -
+          name: Templates/Applications
+      items:
+        -
+          uuid: b165c348c8944516a740b81f2dc924ea
+          name: 'RADIUS Authentication port listen'
+          key: 'net.udp.listen[{$RADIUS_AUTH_PORT}]'
+          tags:
+            -
+              tag: Application
+              value: RADIUS
+          triggers:
+            -
+              uuid: 21aa1787f4c24be39530b56e7985a903
+              expression: 'last(/FreeRADIUS by Zabbix agent/net.udp.listen[{$RADIUS_AUTH_PORT}])=0'
+              name: 'RADIUS service is down on {HOST.NAME}'
+              priority: HIGH
+        -
+          uuid: 2b6d71c587d5468ab15a859fdc512564
+          name: FreeRADIUS-Total-Access-Accepts
+          type: DEPENDENT
+          key: radius.status.total_access_accepts
+          delay: '0'
+          preprocessing:
+            -
+              type: REGEX
+              parameters:
+                - 'FreeRADIUS-Total-Access-Accepts\s*=\s*(\d+)'
+                - \1
+            -
+              type: CHANGE_PER_SECOND
+              parameters:
+                - ''
+          master_item:
+            key: 'radius.status[1,{$RADIUS_STATUS_HOST},{$RADIUS_STATUS_PORT},{$RADIUS_STATUS_SECRET}]'
+          tags:
+            -
+              tag: Application
+              value: RADIUS
+        -
+          uuid: 46f8f4c33a754e618350b31620e6f604
+          name: FreeRADIUS-Total-Access-Challenges
+          type: DEPENDENT
+          key: radius.status.total_access_challenges
+          delay: '0'
+          preprocessing:
+            -
+              type: REGEX
+              parameters:
+                - 'FreeRADIUS-Total-Access-Challenges\s*=\s*(\d+)'
+                - \1
+            -
+              type: CHANGE_PER_SECOND
+              parameters:
+                - ''
+          master_item:
+            key: 'radius.status[1,{$RADIUS_STATUS_HOST},{$RADIUS_STATUS_PORT},{$RADIUS_STATUS_SECRET}]'
+          tags:
+            -
+              tag: Application
+              value: RADIUS
+        -
+          uuid: b10befb95c6f46bcb7801bc546ea2ebe
+          name: FreeRADIUS-Total-Access-Rejects
+          type: DEPENDENT
+          key: radius.status.total_access_rejects
+          delay: '0'
+          preprocessing:
+            -
+              type: REGEX
+              parameters:
+                - 'FreeRADIUS-Total-Access-Rejects\s*=\s*(\d+)'
+                - \1
+            -
+              type: CHANGE_PER_SECOND
+              parameters:
+                - ''
+          master_item:
+            key: 'radius.status[1,{$RADIUS_STATUS_HOST},{$RADIUS_STATUS_PORT},{$RADIUS_STATUS_SECRET}]'
+          tags:
+            -
+              tag: Application
+              value: RADIUS
+        -
+          uuid: 85e5abd1a149472a8c9c02c9562a8985
+          name: FreeRADIUS-Total-Access-Requests
+          type: DEPENDENT
+          key: radius.status.total_access_requests
+          delay: '0'
+          preprocessing:
+            -
+              type: REGEX
+              parameters:
+                - 'FreeRADIUS-Total-Access-Requests\s*=\s*(\d+)'
+                - \1
+            -
+              type: CHANGE_PER_SECOND
+              parameters:
+                - ''
+          master_item:
+            key: 'radius.status[1,{$RADIUS_STATUS_HOST},{$RADIUS_STATUS_PORT},{$RADIUS_STATUS_SECRET}]'
+          tags:
+            -
+              tag: Application
+              value: RADIUS
+        -
+          uuid: ed40c299cc994a0c8065cab3cabecd92
+          name: FreeRADIUS-Total-Accounting-Requests
+          type: DEPENDENT
+          key: radius.status.total_accounting_requests
+          delay: '0'
+          preprocessing:
+            -
+              type: REGEX
+              parameters:
+                - 'FreeRADIUS-Total-Accounting-Requests\s*=\s*(\d+)'
+                - \1
+            -
+              type: CHANGE_PER_SECOND
+              parameters:
+                - ''
+          master_item:
+            key: 'radius.status[2,{$RADIUS_STATUS_HOST},{$RADIUS_STATUS_PORT},{$RADIUS_STATUS_SECRET}]'
+          tags:
+            -
+              tag: Application
+              value: RADIUS
+        -
+          uuid: ae929462a27d447788cd2521551cc7b2
+          name: FreeRADIUS-Total-Accounting-Responses
+          type: DEPENDENT
+          key: radius.status.total_accounting_responses
+          delay: '0'
+          preprocessing:
+            -
+              type: REGEX
+              parameters:
+                - 'FreeRADIUS-Total-Accounting-Responses\s*=\s*(\d+)'
+                - \1
+            -
+              type: CHANGE_PER_SECOND
+              parameters:
+                - ''
+          master_item:
+            key: 'radius.status[2,{$RADIUS_STATUS_HOST},{$RADIUS_STATUS_PORT},{$RADIUS_STATUS_SECRET}]'
+          tags:
+            -
+              tag: Application
+              value: RADIUS
+        -
+          uuid: f4c1651d47d5478dbfab99724b1dd8df
+          name: FreeRADIUS-Total-Acct-Dropped-Requests
+          type: DEPENDENT
+          key: radius.status.total_acct_dropped_requests
+          delay: '0'
+          preprocessing:
+            -
+              type: REGEX
+              parameters:
+                - 'FreeRADIUS-Total-Acct-Dropped-Requests\s*=\s*(\d+)'
+                - \1
+            -
+              type: CHANGE_PER_SECOND
+              parameters:
+                - ''
+          master_item:
+            key: 'radius.status[2,{$RADIUS_STATUS_HOST},{$RADIUS_STATUS_PORT},{$RADIUS_STATUS_SECRET}]'
+          tags:
+            -
+              tag: Application
+              value: RADIUS
+        -
+          uuid: d0709f08d3984325914f4b0a8aa4899e
+          name: FreeRADIUS-Total-Acct-Duplicate-Requests
+          type: DEPENDENT
+          key: radius.status.total_acct_duplicate_requests
+          delay: '0'
+          preprocessing:
+            -
+              type: REGEX
+              parameters:
+                - 'FreeRADIUS-Total-Acct-Duplicate-Requests\s*=\s*(\d+)'
+                - \1
+            -
+              type: CHANGE_PER_SECOND
+              parameters:
+                - ''
+          master_item:
+            key: 'radius.status[2,{$RADIUS_STATUS_HOST},{$RADIUS_STATUS_PORT},{$RADIUS_STATUS_SECRET}]'
+          tags:
+            -
+              tag: Application
+              value: RADIUS
+        -
+          uuid: 92b8cd1894a84e04ad573a63fbc0b4ac
+          name: FreeRADIUS-Total-Acct-Invalid-Requests
+          type: DEPENDENT
+          key: radius.status.total_acct_invalid_requests
+          delay: '0'
+          preprocessing:
+            -
+              type: REGEX
+              parameters:
+                - 'FreeRADIUS-Total-Acct-Invalid-Requests\s*=\s*(\d+)'
+                - \1
+            -
+              type: CHANGE_PER_SECOND
+              parameters:
+                - ''
+          master_item:
+            key: 'radius.status[2,{$RADIUS_STATUS_HOST},{$RADIUS_STATUS_PORT},{$RADIUS_STATUS_SECRET}]'
+          tags:
+            -
+              tag: Application
+              value: RADIUS
+        -
+          uuid: 013ddaa5d7fe47229887c3b18459bcca
+          name: FreeRADIUS-Total-Acct-Malformed-Requests
+          type: DEPENDENT
+          key: radius.status.total_acct_malformed_requests
+          delay: '0'
+          preprocessing:
+            -
+              type: REGEX
+              parameters:
+                - 'FreeRADIUS-Total-Acct-Malformed-Requests\s*=\s*(\d+)'
+                - \1
+            -
+              type: CHANGE_PER_SECOND
+              parameters:
+                - ''
+          master_item:
+            key: 'radius.status[2,{$RADIUS_STATUS_HOST},{$RADIUS_STATUS_PORT},{$RADIUS_STATUS_SECRET}]'
+          tags:
+            -
+              tag: Application
+              value: RADIUS
+        -
+          uuid: d17545ebd3ff4f2c812e25513fd8ee07
+          name: FreeRADIUS-Total-Acct-Unknown-Types
+          type: DEPENDENT
+          key: radius.status.total_acct_unknown_types
+          delay: '0'
+          preprocessing:
+            -
+              type: REGEX
+              parameters:
+                - 'FreeRADIUS-Total-Acct-Unknown-Types\s*=\s*(\d+)'
+                - \1
+            -
+              type: CHANGE_PER_SECOND
+              parameters:
+                - ''
+          master_item:
+            key: 'radius.status[2,{$RADIUS_STATUS_HOST},{$RADIUS_STATUS_PORT},{$RADIUS_STATUS_SECRET}]'
+          tags:
+            -
+              tag: Application
+              value: RADIUS
+        -
+          uuid: 9854e8f2e80e4ad8b0f970807c537539
+          name: FreeRADIUS-Total-Auth-Dropped-Requests
+          type: DEPENDENT
+          key: radius.status.total_auth_dropped_requests
+          delay: '0'
+          preprocessing:
+            -
+              type: REGEX
+              parameters:
+                - 'FreeRADIUS-Total-Auth-Dropped-Requests\s*=\s*(\d+)'
+                - \1
+            -
+              type: CHANGE_PER_SECOND
+              parameters:
+                - ''
+          master_item:
+            key: 'radius.status[1,{$RADIUS_STATUS_HOST},{$RADIUS_STATUS_PORT},{$RADIUS_STATUS_SECRET}]'
+          tags:
+            -
+              tag: Application
+              value: RADIUS
+        -
+          uuid: f7f82ab8a0b0402ea3d95834a2ce986b
+          name: FreeRADIUS-Total-Auth-Duplicate-Requests
+          type: DEPENDENT
+          key: radius.status.total_auth_duplicate_requests
+          delay: '0'
+          preprocessing:
+            -
+              type: REGEX
+              parameters:
+                - 'FreeRADIUS-Total-Auth-Duplicate-Requests\s*=\s*(\d+)'
+                - \1
+            -
+              type: CHANGE_PER_SECOND
+              parameters:
+                - ''
+          master_item:
+            key: 'radius.status[1,{$RADIUS_STATUS_HOST},{$RADIUS_STATUS_PORT},{$RADIUS_STATUS_SECRET}]'
+          tags:
+            -
+              tag: Application
+              value: RADIUS
+        -
+          uuid: fe2edac2367b492f84b4353a38c06476
+          name: FreeRADIUS-Total-Auth-Invalid-Requests
+          type: DEPENDENT
+          key: radius.status.total_auth_invalid_requests
+          delay: '0'
+          preprocessing:
+            -
+              type: REGEX
+              parameters:
+                - 'FreeRADIUS-Total-Auth-Invalid-Requests\s*=\s*(\d+)'
+                - \1
+            -
+              type: CHANGE_PER_SECOND
+              parameters:
+                - ''
+          master_item:
+            key: 'radius.status[1,{$RADIUS_STATUS_HOST},{$RADIUS_STATUS_PORT},{$RADIUS_STATUS_SECRET}]'
+          tags:
+            -
+              tag: Application
+              value: RADIUS
+        -
+          uuid: ef943be45b00484bb11b40206a847e86
+          name: FreeRADIUS-Total-Auth-Malformed-Requests
+          type: DEPENDENT
+          key: radius.status.total_auth_malformed_requests
+          delay: '0'
+          preprocessing:
+            -
+              type: REGEX
+              parameters:
+                - 'FreeRADIUS-Total-Auth-Malformed-Requests\s*=\s*(\d+)'
+                - \1
+            -
+              type: CHANGE_PER_SECOND
+              parameters:
+                - ''
+          master_item:
+            key: 'radius.status[1,{$RADIUS_STATUS_HOST},{$RADIUS_STATUS_PORT},{$RADIUS_STATUS_SECRET}]'
+          tags:
+            -
+              tag: Application
+              value: RADIUS
+        -
+          uuid: 8e153a61b9e040189ada0b8aa5939f26
+          name: FreeRADIUS-Total-Auth-Responses
+          type: DEPENDENT
+          key: radius.status.total_auth_responses
+          delay: '0'
+          preprocessing:
+            -
+              type: REGEX
+              parameters:
+                - 'FreeRADIUS-Total-Auth-Responses\s*=\s*(\d+)'
+                - \1
+            -
+              type: CHANGE_PER_SECOND
+              parameters:
+                - ''
+          master_item:
+            key: 'radius.status[1,{$RADIUS_STATUS_HOST},{$RADIUS_STATUS_PORT},{$RADIUS_STATUS_SECRET}]'
+          tags:
+            -
+              tag: Application
+              value: RADIUS
+        -
+          uuid: 31e8a0323ee64eabae46c09b92fdbbae
+          name: FreeRADIUS-Total-Auth-Unknown-Types
+          type: DEPENDENT
+          key: radius.status.total_auth_unknown_types
+          delay: '0'
+          preprocessing:
+            -
+              type: REGEX
+              parameters:
+                - 'FreeRADIUS-Total-Auth-Unknown-Types\s*=\s*(\d+)'
+                - \1
+            -
+              type: CHANGE_PER_SECOND
+              parameters:
+                - ''
+          master_item:
+            key: 'radius.status[1,{$RADIUS_STATUS_HOST},{$RADIUS_STATUS_PORT},{$RADIUS_STATUS_SECRET}]'
+          tags:
+            -
+              tag: Application
+              value: RADIUS
+        -
+          uuid: a51e04ddccf3425aa7826dba433de297
+          name: 'RADIUS Authentication Statistics'
+          key: 'radius.status[1,{$RADIUS_STATUS_HOST},{$RADIUS_STATUS_PORT},{$RADIUS_STATUS_SECRET}]'
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          description: |
+            Get Auth statistics via User Parameter "radius.status".
+            
+            Returns text.
+            
+            Items for particular counters must depend on this item.
+          tags:
+            -
+              tag: Application
+              value: RADIUS
+        -
+          uuid: a779ee0026044557b50a43dc8f9c7050
+          name: 'RADIUS Accounting Statistics'
+          key: 'radius.status[2,{$RADIUS_STATUS_HOST},{$RADIUS_STATUS_PORT},{$RADIUS_STATUS_SECRET}]'
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          description: |
+            Get Accounting statistics via User Parameter "radius.status".
+            
+            Returns text.
+            
+            Items for particular counters must depend on this item.
+          tags:
+            -
+              tag: Application
+              value: RADIUS
+      tags:
+        -
+          tag: Application
+          value: RADIUS
+      macros:
+        -
+          macro: '{$RADIUS_STATUS_HOST}'
+          value: 127.0.0.1
+        -
+          macro: '{$RADIUS_STATUS_PORT}'
+          value: '18121'
+        -
+          macro: '{$RADIUS_STATUS_SECRET}'
+          value: adminsecret
+  graphs:
+    -
+      uuid: ea03641ecb404d88ac87d1ccc4988bab
+      name: FreeRADIUS-Authentication
+      graph_items:
+        -
+          sortorder: '5'
+          color: '969600'
+          item:
+            host: 'FreeRADIUS by Zabbix agent'
+            key: radius.status.total_auth_responses
