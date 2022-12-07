@@ -1,6 +1,6 @@
 zabbix_export:
   version: '6.2'
-  date: '2022-11-21T14:07:42Z'
+  date: '2022-12-07T11:10:41Z'
   template_groups:
     -
       uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
@@ -21,13 +21,17 @@ zabbix_export:
           tags:
             -
               tag: Application
-              value: RADIUS
+              value: FreeRADIUS
           triggers:
             -
               uuid: 21aa1787f4c24be39530b56e7985a903
               expression: 'last(/FreeRADIUS by Zabbix agent/net.udp.listen[{$RADIUS_AUTH_PORT}])=0'
-              name: 'RADIUS service is down on {HOST.NAME}'
+              name: 'RADIUS authentication service is down on {HOST.NAME}'
               priority: HIGH
+              tags:
+                -
+                  tag: Application
+                  value: FreeRADIUS
         -
           uuid: 2b6d71c587d5468ab15a859fdc512564
           name: FreeRADIUS-Total-Access-Accepts
@@ -49,7 +53,7 @@ zabbix_export:
           tags:
             -
               tag: Application
-              value: RADIUS
+              value: FreeRADIUS
         -
           uuid: 46f8f4c33a754e618350b31620e6f604
           name: FreeRADIUS-Total-Access-Challenges
@@ -71,7 +75,7 @@ zabbix_export:
           tags:
             -
               tag: Application
-              value: RADIUS
+              value: FreeRADIUS
         -
           uuid: b10befb95c6f46bcb7801bc546ea2ebe
           name: FreeRADIUS-Total-Access-Rejects
@@ -93,7 +97,7 @@ zabbix_export:
           tags:
             -
               tag: Application
-              value: RADIUS
+              value: FreeRADIUS
         -
           uuid: 85e5abd1a149472a8c9c02c9562a8985
           name: FreeRADIUS-Total-Access-Requests
@@ -115,7 +119,7 @@ zabbix_export:
           tags:
             -
               tag: Application
-              value: RADIUS
+              value: FreeRADIUS
         -
           uuid: ed40c299cc994a0c8065cab3cabecd92
           name: FreeRADIUS-Total-Accounting-Requests
@@ -137,7 +141,7 @@ zabbix_export:
           tags:
             -
               tag: Application
-              value: RADIUS
+              value: FreeRADIUS
         -
           uuid: ae929462a27d447788cd2521551cc7b2
           name: FreeRADIUS-Total-Accounting-Responses
@@ -159,7 +163,7 @@ zabbix_export:
           tags:
             -
               tag: Application
-              value: RADIUS
+              value: FreeRADIUS
         -
           uuid: f4c1651d47d5478dbfab99724b1dd8df
           name: FreeRADIUS-Total-Acct-Dropped-Requests
@@ -181,7 +185,7 @@ zabbix_export:
           tags:
             -
               tag: Application
-              value: RADIUS
+              value: FreeRADIUS
         -
           uuid: d0709f08d3984325914f4b0a8aa4899e
           name: FreeRADIUS-Total-Acct-Duplicate-Requests
@@ -203,7 +207,7 @@ zabbix_export:
           tags:
             -
               tag: Application
-              value: RADIUS
+              value: FreeRADIUS
         -
           uuid: 92b8cd1894a84e04ad573a63fbc0b4ac
           name: FreeRADIUS-Total-Acct-Invalid-Requests
@@ -225,7 +229,7 @@ zabbix_export:
           tags:
             -
               tag: Application
-              value: RADIUS
+              value: FreeRADIUS
         -
           uuid: 013ddaa5d7fe47229887c3b18459bcca
           name: FreeRADIUS-Total-Acct-Malformed-Requests
@@ -247,7 +251,7 @@ zabbix_export:
           tags:
             -
               tag: Application
-              value: RADIUS
+              value: FreeRADIUS
         -
           uuid: d17545ebd3ff4f2c812e25513fd8ee07
           name: FreeRADIUS-Total-Acct-Unknown-Types
@@ -269,7 +273,7 @@ zabbix_export:
           tags:
             -
               tag: Application
-              value: RADIUS
+              value: FreeRADIUS
         -
           uuid: 9854e8f2e80e4ad8b0f970807c537539
           name: FreeRADIUS-Total-Auth-Dropped-Requests
@@ -291,7 +295,7 @@ zabbix_export:
           tags:
             -
               tag: Application
-              value: RADIUS
+              value: FreeRADIUS
         -
           uuid: f7f82ab8a0b0402ea3d95834a2ce986b
           name: FreeRADIUS-Total-Auth-Duplicate-Requests
@@ -313,7 +317,7 @@ zabbix_export:
           tags:
             -
               tag: Application
-              value: RADIUS
+              value: FreeRADIUS
         -
           uuid: fe2edac2367b492f84b4353a38c06476
           name: FreeRADIUS-Total-Auth-Invalid-Requests
@@ -335,7 +339,7 @@ zabbix_export:
           tags:
             -
               tag: Application
-              value: RADIUS
+              value: FreeRADIUS
         -
           uuid: ef943be45b00484bb11b40206a847e86
           name: FreeRADIUS-Total-Auth-Malformed-Requests
@@ -357,7 +361,7 @@ zabbix_export:
           tags:
             -
               tag: Application
-              value: RADIUS
+              value: FreeRADIUS
         -
           uuid: 8e153a61b9e040189ada0b8aa5939f26
           name: FreeRADIUS-Total-Auth-Responses
@@ -379,7 +383,7 @@ zabbix_export:
           tags:
             -
               tag: Application
-              value: RADIUS
+              value: FreeRADIUS
         -
           uuid: 31e8a0323ee64eabae46c09b92fdbbae
           name: FreeRADIUS-Total-Auth-Unknown-Types
@@ -401,7 +405,7 @@ zabbix_export:
           tags:
             -
               tag: Application
-              value: RADIUS
+              value: FreeRADIUS
         -
           uuid: a51e04ddccf3425aa7826dba433de297
           name: 'RADIUS Authentication Statistics'
@@ -418,7 +422,7 @@ zabbix_export:
           tags:
             -
               tag: Application
-              value: RADIUS
+              value: FreeRADIUS
         -
           uuid: a779ee0026044557b50a43dc8f9c7050
           name: 'RADIUS Accounting Statistics'
@@ -435,11 +439,11 @@ zabbix_export:
           tags:
             -
               tag: Application
-              value: RADIUS
+              value: FreeRADIUS
       tags:
         -
           tag: Application
-          value: RADIUS
+          value: FreeRADIUS
       macros:
         -
           macro: '{$RADIUS_STATUS_HOST}'
@@ -450,14 +454,3 @@ zabbix_export:
         -
           macro: '{$RADIUS_STATUS_SECRET}'
           value: adminsecret
-  graphs:
-    -
-      uuid: ea03641ecb404d88ac87d1ccc4988bab
-      name: FreeRADIUS-Authentication
-      graph_items:
-        -
-          sortorder: '5'
-          color: '969600'
-          item:
-            host: 'FreeRADIUS by Zabbix agent'
-            key: radius.status.total_auth_responses
